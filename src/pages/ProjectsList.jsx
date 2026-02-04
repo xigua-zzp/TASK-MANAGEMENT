@@ -119,8 +119,11 @@ function ProjectsList() {
             px-6
             py-3
             rounded-[8px]
+            shadow-[0_2px_8px_rgba(212,175,55,0.3)]
             hover:bg-[#E5C100]
-            hover:shadow-[0_0_8px_rgba(212,175,55,0.3)]
+            hover:shadow-[0_0_12px_rgba(212,175,55,0.5)]
+            active:bg-[#D4AF37]
+            active:shadow-[0_1px_4px_rgba(212,175,55,0.3)]
             transition-all
             cursor-pointer
           "

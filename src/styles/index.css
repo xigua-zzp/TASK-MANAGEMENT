@@ -713,6 +713,17 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+}
+
+.add-task-btn:hover {
+  background-color: #E5C100;
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+}
+
+.add-task-btn:active {
+  background-color: #D4AF37;
+  box-shadow: 0 1px 4px rgba(212, 175, 55, 0.3);
 }
 
 
