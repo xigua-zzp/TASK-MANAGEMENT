@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install)",
+      "Bash(timeout 20s npm run dev:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(timeout 30s npm run dev)",
+      "Bash(npm run build)",
+      "Bash(npm run dev)",
+      "Bash(npx kill-port:*)",
+      "Bash(timeout:*)",
+      "Bash(cd:*)",
+      "Bash(npx webpack:*)",
+      "Bash(npm install:*)",
+      "Bash(git init)",
+      "Bash(git remote add:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}

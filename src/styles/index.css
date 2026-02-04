@@ -1,0 +1,1075 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #121212;
+    --foreground: #FFFFFF;
+    --card: #1E1E1E;
+    --card-foreground: #FFFFFF;
+    --popover: #1E1E1E;
+    --popover-foreground: #FFFFFF;
+    --primary: #D4AF37;
+    --primary-foreground: #000000;
+    --secondary: #2A2A2A;
+    --secondary-foreground: #FFFFFF;
+    --muted: #2A2A2A;
+    --muted-foreground: #888888;
+    --accent: #2A2A2A;
+    --accent-foreground: #FFFFFF;
+    --destructive: #EF4444;
+    --destructive-foreground: #FFFFFF;
+    --border: #333333;
+    --input: #333333;
+    --ring: #D4AF37;
+    --radius: 0.5rem;
+  }
+
+  body {
+    @apply font-sans bg-page text-white;
+    min-height: 100vh;
+    color: var(--foreground);
+    background-color: var(--background);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-5 py-2.5 rounded-button font-medium transition-all duration-200;
+  }
+
+  .btn-primary {
+    @apply bg-brown-500 text-white hover:bg-brown-600 active:bg-brown-700;
+  }
+
+  .btn-secondary {
+    @apply bg-white/10 text-white hover:bg-white/20;
+  }
+
+  .card {
+    @apply bg-white rounded-card shadow-soft p-6 transition-all duration-200;
+  }
+
+  .card:hover {
+    @apply shadow-hover;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 bg-white border border-gray-200 rounded-lg
+           focus:outline-none focus:ring-2 focus:ring-brown-300 focus:border-transparent
+           transition-all duration-200 text-gray-800;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-600 mb-2;
+  }
+
+  .progress-bar {
+    @apply h-2 bg-gray-200 rounded-full overflow-hidden;
+  }
+
+  .progress-bar-fill {
+    @apply h-full bg-brown-500 rounded-full transition-all duration-500;
+  }
+
+  /* Header */
+  .header {
+    @apply bg-white border-b border-gray-200/10;
+  }
+
+  /* Status badges */
+  .badge {
+    @apply px-3 py-1 text-xs font-medium rounded-full;
+  }
+
+  .badge-on-track {
+    @apply bg-status-on-track text-white;
+  }
+
+  .badge-at-risk {
+    @apply bg-status-at-risk text-white;
+  }
+
+  /* Priority indicators */
+  .priority-high {
+    @apply bg-red-500;
+  }
+
+  .priority-medium {
+    @apply bg-orange-500;
+  }
+
+  .priority-low {
+    @apply bg-green-500;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-page;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}
+
+.animate-slideDown {
+  animation: slideDown 0.2s ease-out;
+}
+
+/* Tree expand/collapse animation */
+.task-children {
+  animation: slideDown 0.2s ease-out;
+}
+
+/* Line clamp utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Task tree list connector lines */
+/* ========================
+   Task Row Styles
+   ======================== */
+
+/* 任务行容器 */
+.task-row-wrapper {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-bottom: 2px;
+}
+
+/* 任务行 - 固定宽度布局 */
+.task-row {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border: 1px solid transparent;
+  height: 48px;
+  box-sizing: border-box;
+  margin-left: -16px;
+  margin-right: -16px;
+  width: calc(100% + 32px);
+}
+
+/* Hover 和 selected 样式应用到整行 */
+ .task-row:hover {
+  background-color:  #FFD93D26;
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+.task-row-wrapper.selected > .task-row {
+  background-color: #FFD93D26;
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+/* 选中指示器 - 在 wrapper 左侧 */
+.selected-indicator {
+  width: 4px;
+  height: 48px;
+  background-color: #D4AF37;
+  border-radius: 2px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.level-connector{
+  display: flex;
+}
+
+/* 顶层任务（level-0）不显示连接线 */
+.task-row-wrapper.level-0 .level-connector {
+  display: none;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 50px;
+  background-color: #333;
+}
+
+.horizontal-line {
+  width: 24px;
+  height: 1px;
+  background-color: #333;
+  align-self: center;
+}
+
+/* 展开箭头 - 固定20px */
+.expand-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.expand-arrow svg {
+  transition: transform 0.2s ease;
+}
+
+.expand-arrow:hover svg path {
+  stroke: #D4AF37;
+}
+
+.no-children-dot {
+  width: 4px;
+  height: 4px;
+  background-color: #555;
+  border-radius: 50%;
+}
+
+/* 任务名称 - 弹性占据剩余空间 */
+.task-name {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  color: #E5E5E5;
+  min-width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 12px;
+}
+
+/* 进度条 - 固定150px (100px进度条 + 50px间隔) */
+.task-row .progress-bar-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.task-row .progress-bar {
+  width: 100px;
+  height: 6px;
+  background-color: #2A2A2A;
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.task-row .progress-fill {
+  height: 100%;
+  background-color: #D4AF37;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.task-row .progress-percent {
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+  width: 38px;
+  text-align: left;
+}
+
+/* 预估工时 - 固定150px */
+.task-row .estimate {
+  font-size: 13px;
+  color: #888;
+  width: 120px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* 预算 - 固定150px */
+.task-row .budget {
+  font-size: 13px;
+  color: #E5E5E5;
+  width: 150px;
+  text-align: right;
+  flex-shrink: 0;
+  letter-spacing: 2px;
+}
+
+/* 进度环 - 固定150px */
+.progress-ring-wrap {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  flex-shrink: 0;
+  justify-content: center;
+}
+
+/* 状态标签 - 固定150px */
+.status-badge-wrap {
+  width: 150px;
+  flex-shrink: 0;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5.5px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-sizing: border-box;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.status-badge[data-status="In Progress"] {
+  background-color: #FFD93D33;
+  color: #FFD93D;
+}
+
+.status-badge[data-status="Blocked"] {
+  background-color: #FF6B6B33;
+  color: #FF6B6B;
+}
+
+.status-badge[data-status="Not Started"],
+.status-badge[data-status="Todo"] {
+  background-color: #99999933;
+  color: #999999;
+}
+
+.status-badge[data-status="Done"] {
+  background-color: #10B98133;
+  color: #10B981;
+}
+
+/* 子任务容器 - 移除 padding，通过伪元素实现缩进 */
+.children-container {
+  display: flex;
+  flex-direction: column;
+}
+
+/* 层级缩进 - 使用 padding-left 实现 */
+.task-row-wrapper.level-1 {
+  padding-left: 16px;
+}
+
+.task-row-wrapper.level-2 {
+  padding-left: 32px;
+}
+
+.task-row-wrapper.level-3 {
+  padding-left: 48px;
+}
+
+/* ========================
+   Task Group Styles
+   ======================== */
+
+.task-group {
+  margin-bottom: 16px;
+}
+
+.group-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.group-header:hover {
+  background-color: rgba(255, 255, 255, 0.03);
+}
+
+.expand-icon {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}
+
+.expand-icon.rotated {
+  transform: rotate(180deg);
+}
+
+.group-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #D4AF37;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.group-info {
+  font-size: 12px;
+  color: #666;
+  margin-left: auto;
+}
+
+.group-content {
+  padding: 0 0 16px 0;
+}
+
+/* 表格表头 */
+.table-header {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  padding-left: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  margin-bottom: 4px;
+  height: 50px;
+  box-sizing: border-box;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #1A1A1A;
+}
+
+/* 表头占位符：顶层任务没有连接线和箭头，只保留展开箭头的空间(20px) */
+.table-header-placeholder {
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.table-header .header-task {
+  flex: 1;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FFD93D;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding-right: 12px;
+}
+
+/* 进度条表头 - 固定150px */
+.table-header .header-progress {
+  width: 150px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FFD93D;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* 预估工时表头 - 固定150px */
+.table-header .header-estimate {
+  width: 120px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FFD93D;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* 预算表头 - 固定150px */
+.table-header .header-budget {
+  width: 150px;
+  text-align: right;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FFD93D;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* 进度环表头 - 固定150px */
+.table-header .header-progress-ring {
+  width: 150px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FFD93D;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+}
+
+/* 状态表头 - 固定150px */
+.table-header .header-status {
+  width: 150px;
+  font-size: 11px;
+  font-weight: 500;
+  color: #FFD93D;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+}
+
+/* 选中任务操作 */
+.selected-actions {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.action-btn {
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  border: none;
+}
+
+.action-btn.edit {
+  background-color: rgba(212, 175, 55, 0.1);
+  color: #D4AF37;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+.action-btn.edit:hover {
+  background-color: rgba(212, 175, 55, 0.2);
+}
+
+.action-btn.delete {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #EF4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.action-btn.delete:hover {
+  background-color: rgba(239, 68, 68, 0.2);
+}
+
+/* ========================
+   Overview Cards Styles
+   ======================== */
+
+.overview-section {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.overview-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 0 32px 0;
+  height: 160px;
+  background: linear-gradient(90deg, #1A1A1A 0%, #2A2A2A 100%);
+  border-radius: 16px;
+}
+
+.overview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.overview-value {
+  font-size: 45px;
+  font-weight: 600;
+  color: #FFFFFF;
+  line-height: 1.2;
+  font-family: 'Playfair Display', serif;
+}
+
+.overview-label {
+  font-size: 14px;
+  color: #888888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.overview-progress {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Breadcrumb styles */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+  font-size: 14px;
+}
+
+.breadcrumb-link {
+  color: #888;
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.breadcrumb-link:hover {
+  color: #D4AF37;
+}
+
+.breadcrumb-sep {
+  color: #555;
+}
+
+.breadcrumb-current {
+  color: #E5E5E5;
+}
+
+/* Page header */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.page-title {
+  font-size: 48px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.add-task-btn {
+  padding: 10px 20px;
+  background-color: #FFD93D;
+  border: 1px solid #FFD93D;
+  border-radius: 8px;
+  color: #121212;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+
+.title-underline {
+  height: 6px;
+  width: 200px;
+  background: linear-gradient(90deg, #FFD93D, transparent 100%);
+  margin-bottom: 32px;
+  border-radius: 3px;
+  box-shadow: 0 0 20px 2px rgba(255, 217, 61, 0.3);
+}
+
+/* Section title */
+.section-title {
+  font-size: 18px;
+  font-weight: 500;
+  color: #FFFFFF;
+  margin: 0 0 16px 0;
+}
+
+/* Tasks section with fixed height and scrolling */
+.tasks-section {
+  max-height: calc(100vh - 420px);
+  overflow-y: auto;
+  padding-right: 8px;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  background-color: #1A1A1A;
+}
+
+/* Custom scrollbar for tasks section */
+.tasks-section::-webkit-scrollbar {
+  width: 6px;
+}
+
+.tasks-section::-webkit-scrollbar-track {
+  background: #1E1E1E;
+  border-radius: 3px;
+}
+
+.tasks-section::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+.tasks-section::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
+/* Empty state */
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: #888;
+}
+
+.empty-state p {
+  margin: 0 0 16px 0;
+  font-size: 14px;
+}
+
+.create-link {
+  background: none;
+  border: none;
+  color: #D4AF37;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.create-link:hover {
+  color: #E5C558;
+}
+
+/* Not found */
+.not-found {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  color: #888;
+  font-size: 18px;
+}
+
+/* Project detail layout */
+.project-detail {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.detail-content {
+  width: 100%;
+  padding: 40px 48px;
+}
+
+/* ========================
+   Task Tree Table Styles
+   ======================== */
+
+.task-tree-table-wrapper {
+  border: 1px solid #333;
+  border-radius: 12px;
+  background-color: #1A1A1A;
+  overflow: hidden;
+}
+
+/* 分组标题 */
+.task-group {
+  margin-bottom: 0;
+}
+
+.group-title-row {
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  background-color: #222;
+  border-bottom: 1px solid #333;
+  cursor: pointer;
+}
+
+.group-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #D4AF37;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.group-info {
+  font-size: 12px;
+  color: #666;
+  margin-left: auto;
+}
+
+/* 表格 */
+.task-tree-table {
+  width: 100%;
+}
+
+/* 任务行 */
+.task-row {
+  height: 48px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.task-row:hover {
+  background-color: rgba(255, 217, 61, 0.08);
+}
+
+.task-row.selected {
+  background-color: rgba(255, 217, 61, 0.12);
+  border-left: 3px solid #D4AF37;
+}
+
+/* 任务名称单元格 */
+.task-name-cell {
+  padding: 0 16px;
+}
+
+.task-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #E5E5E5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 进度单元格 */
+.progress-cell {
+  width: 150px;
+  flex-shrink: 0;
+  padding: 0 16px;
+}
+
+.progress-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.progress-cell .progress-bar {
+  width: 100px;
+  height: 6px;
+  background-color: #2A2A2A;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progress-cell .progress-fill {
+  height: 100%;
+  background-color: #D4AF37;
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.progress-cell .progress-percent {
+  font-size: 12px;
+  color: #888;
+  font-weight: 500;
+  width: 35px;
+}
+
+/* 预估工时单元格 */
+.estimate-cell {
+  width: 120px;
+  flex-shrink: 0;
+  padding: 0 16px;
+  font-size: 13px;
+  color: #888;
+  text-align: right;
+}
+
+/* 预算单元格 */
+.budget-cell {
+  width: 150px;
+  flex-shrink: 0;
+  padding: 0 16px;
+  font-size: 13px;
+  color: #E5E5E5;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+/* 进度环单元格 */
+.progress-ring-cell {
+  width: 150px;
+  flex-shrink: 0;
+  padding: 0 16px;
+  text-align: center;
+}
+
+/* 状态单元格 */
+.status-cell {
+  width: 150px;
+  flex-shrink: 0;
+  padding: 0 16px;
+}
+
+/* 状态标签样式 */
+.task-status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 50px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.task-status-badge .status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+/* 空状态 */
+.task-tree-table-wrapper .empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: #888;
+}
+
+/* Task Table */
+.task-table-wrapper {
+  background-color: #1E1E1E;
+  border-radius: 16px;
+  padding: 24px;
+  margin-top: 24px;
+}
+
+.task-table-wrapper .ant-table {
+  background-color: #1E1E1E;
+}
+
+.task-table-wrapper .ant-table-thead > tr > th {
+  background-color: #1E1E1E;
+  color: #FFD93D;
+  border-bottom: none;
+}
+
+.task-table-wrapper .ant-table-thead > tr > th::before {
+  display: none !important;
+}
+
+/* 修复表头右侧白边 */
+.task-table-wrapper .ant-table-thead > tr > th:last-child {
+  background-color: #1E1E1E !important;
+}
+
+/* 隐藏 AntD 滚动条占位列 */
+.task-table-wrapper .ant-table-cell.ant-table-cell-scrollbar {
+  display: none !important;
+}
+
+.task-table-wrapper .ant-table-scroll {
+  overflow: hidden;
+}
+
+/* Task Table */
+.task-table-wrapper {
+  font-family: sans-serif;
+}
+
+.task-table-wrapper .ant-table-tbody > tr.ant-table-row:nth-child(odd) > td {
+  background-color: #1E1E1E;
+}
+
+.task-table-wrapper .ant-table-tbody > tr.ant-table-row:nth-child(even) > td {
+  background-color: #252525;
+}
+
+.task-table-wrapper .ant-table-tbody > tr > td {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.task-table-wrapper .ant-table-tbody > tr:hover > td {
+  background-color: #FFD93D26 !important;
+}
+
+.task-table-wrapper .ant-table-tbody > tr.ant-table-row-selected:hover > td,
+.task-table-wrapper .ant-table-tbody > tr:hover.ant-table-row-selected > td {
+  background-color: #FFD93D26 !important;
+}
+
+.task-table-wrapper .ant-table-tbody > tr:hover > td:first-child {
+  position: relative;
+}
+
+.task-table-wrapper .ant-table-tbody > tr:hover > td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #FFD93D;
+}
+
+/* 选中行样式 */
+.task-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > td {
+  background-color: #FFD93D26 !important;
+}
+
+.task-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > td:first-child {
+  position: relative;
+}
+
+.task-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > td:first-child::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #FFD93D;
+}
+
