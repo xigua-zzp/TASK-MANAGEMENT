@@ -642,6 +642,7 @@
   color: #FFFFFF;
   line-height: 1.2;
   font-family: 'Playfair Display', serif;
+  user-select: none;
 }
 
 .overview-label {
@@ -650,6 +651,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   font-weight: 500;
+  user-select: none;
 }
 
 .overview-progress {
@@ -698,6 +700,7 @@
   font-weight: 600;
   color: #FFFFFF;
   margin: 0;
+  user-select: none;
 }
 
 .add-task-btn {

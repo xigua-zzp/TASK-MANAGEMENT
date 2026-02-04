@@ -45,7 +45,7 @@ function ProjectCard({ project }) {
       style={{ flex: '0 0 calc((100% - 64px) / 3)', minWidth: '320px', background: 'linear-gradient(90deg, #1A1A1A 0%, #2A2A2A 100%)' }}
     >
       {/* Title */}
-      <h3 className="font-serif text-[24px] text-white font-semibold mb-4 leading-tight">
+      <h3 className="font-serif text-[24px] text-white font-semibold mb-4 leading-tight select-none">
         {project.title}
       </h3>
 
@@ -107,7 +107,7 @@ function ProjectsList() {
     <div className="min-h-screen bg-[#0A0A0A] px-[64px] py-[48px]">
       {/* Header */}
       <div className="flex justify-between items-center mb-[40px]">
-        <h2 className="font-serif text-[48px] font-semibold text-white">
+        <h2 className="font-serif text-[48px] font-semibold text-white select-none">
           Projects
         </h2>
         <button
