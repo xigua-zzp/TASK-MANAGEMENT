@@ -258,7 +258,7 @@ function TaskModal({ task, projectId, onSave, onClose, onDelete }) {
                     handleChange('parentId', null);
                     setIsParentOpen(false);
                   }}
-                  className="h-[40px] px-[16px] flex items-center text-[#CCCCCC] text-[14px] hover:bg-[#2A2A2A] cursor-pointer transition-colors"
+                  className="h-[40px] px-[16px] flex items-center text-[#CCCCCC] text-[14px] hover:bg-[#FFD93D33] hover:text-[#FFD93D] cursor-pointer transition-colors"
                 >
                   No parent
                 </div>
@@ -269,7 +269,7 @@ function TaskModal({ task, projectId, onSave, onClose, onDelete }) {
                       handleChange('parentId', parent.id);
                       setIsParentOpen(false);
                     }}
-                    className="h-[40px] px-[16px] flex items-center text-[#CCCCCC] text-[14px] hover:bg-[#2A2A2A] cursor-pointer transition-colors"
+                    className="h-[40px] px-[16px] flex items-center text-[#CCCCCC] text-[14px] hover:bg-[#FFD93D33] hover:text-[#FFD93D] cursor-pointer transition-colors"
                     style={{ paddingLeft: parent.level === 1 ? '32px' : '16px' }}
                   >
                     {parent.level === 1 && (
