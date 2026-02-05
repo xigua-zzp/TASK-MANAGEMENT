@@ -23,7 +23,7 @@ export function StatusButton({ status, isSelected, onClick }) {
         borderRadius: '8px',
         border: '2px solid #333333',
         fontSize: '14px',
-        fontWeight: isSelected ? 500 : 400,
+        fontWeight: 500,
         cursor: 'pointer',
         outline: 'none',
         transition: 'all 0.15s ease',
