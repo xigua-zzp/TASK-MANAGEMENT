@@ -51,18 +51,19 @@ export function TaskTable({ dataSource = [], selectedTaskId, onRow, onDoubleClic
         // 最后一层的最后一个节点只显示半根垂直线
         const showHalfLine = level > 0 && isLastInLevel && !hasChildren;
         return (
-          <span style={{ display: 'flex', alignItems: 'center' }}>
+          <span style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
             {/* 缩进占位 - level-1 层 */}
-            {level > 0 &&<span style={{ width: `${level * INDENT_SIZE}px`, flexShrink: 0 }} />}
+            {level > 0 && <span style={{ width: `${level * INDENT_SIZE}px`, flexShrink: 0 }} />}
             {/* 垂直连接线 - 最后一层最后节点显示半根，否则完整 */}
             {level > 0 && (
               <span
                 style={{
-                  width: '1px',
-                  height: showHalfLine ? '18px' : '40px',
+                  position: 'absolute',
+                  left: `${level * INDENT_SIZE + 12}px`,
+                  top: 0,
+                  bottom: showHalfLine ? 'calc(50%)' : 0,
+                  width: '2px',
                   backgroundColor: '#444',
-                  marginRight: '0px',
-                  alignSelf: 'flex-start',
                 }}
               />
             )}
@@ -70,12 +71,12 @@ export function TaskTable({ dataSource = [], selectedTaskId, onRow, onDoubleClic
             {level > 0 && (
               <span
                 style={{
-                  width: '24px',
-                  height: '1px',
+                  width: '28px',
+                  height: '2px',
                   backgroundColor: '#444',
-                  marginRight: '4px',
                   alignSelf: 'flex-start',
-                  marginTop: '18px',
+                  marginTop: '10px',
+                  marginLeft: `-3px`,
                 }}
               />
             )}
