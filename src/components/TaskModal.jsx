@@ -216,10 +216,10 @@ function TaskModal({ task, projectId, onSave, onClose, onDelete }) {
                     handleChange('status', status);
                   }}
                   className={`
-                    px-[20px] py-[10px] rounded-[8px] text-[14px] cursor-pointer transition-all outline-none focus-visible:ring-0 focus-visible:ring-offset-0
+                    px-[20px] py-[10px] rounded-[8px] text-[14px] cursor-pointer transition-all outline-none focus-visible:ring-0 focus-visible:ring-offset-0 border-2 border-[#333333]
                     ${formData.status === status
-                      ? 'bg-[#4B410F] text-[#D4AF37] font-medium border-2 border-[#D4AF37]'
-                      : 'bg-[#1E1E1E] text-[#888888] font-normal border-2 border-[#333333]'
+                      ? 'bg-[#4B410F] text-[#D4AF37] font-medium shadow-[0_0_0_1px_#D4AF37]'
+                      : 'bg-[#1E1E1E] text-[#888888] font-normal'
                     }
                   `}
                 >
