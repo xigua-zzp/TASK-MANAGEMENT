@@ -368,7 +368,7 @@ function TaskModal({ task, projectId, onSave, onClose, onDelete }) {
             </div>
             <button
               type="submit"
-              className="px-[32px] py-[14px] bg-[#FFD93D] text-[#121212] text-[14px] font-semibold rounded-[8px] hover:bg-[#E5C100] shadow-[0_2px_8px_rgba(212,175,55,0.3)] transition-all cursor-pointer"
+              className="px-[32px] py-[14px] text-[#121212] text-[14px] font-semibold rounded-[8px] shadow-[0_2px_8px_rgba(255,215,61,0.4)] hover:shadow-[0_0_12px_rgba(255,215,61,0.6)] transition-all cursor-pointer bg-[linear-gradient(135deg,#FFD93D_0%,#FFC700_100%)] hover:bg-[linear-gradient(135deg,#FFE44D_0%,#FFD700_100%)] active:bg-[linear-gradient(135deg,#E5C100_0%,#E6B800_100%)]"
             >
               Save Task
             </button>

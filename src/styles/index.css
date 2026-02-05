@@ -707,7 +707,7 @@
 
 .add-task-btn {
   padding: 10px 20px;
-  background-color: #FFD93D;
+  background: linear-gradient(135deg, #FFD93D 0%, #FFC700 100%);
   border: 1px solid #FFD93D;
   border-radius: 8px;
   color: #121212;
@@ -715,16 +715,16 @@
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 215, 61, 0.4);
 }
 
 .add-task-btn:hover {
-  background-color: #E5C100;
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.5);
+  background: linear-gradient(135deg, #FFE44D 0%, #FFD700 100%);
+  box-shadow: 0 0 12px rgba(255, 215, 61, 0.6);
 }
 
 .add-task-btn:active {
-  background-color: #D4AF37;
+  background: linear-gradient(135deg, #E5C100 0%, #E6B800 100%);
   box-shadow: 0 1px 4px rgba(212, 175, 55, 0.3);
 }
 
