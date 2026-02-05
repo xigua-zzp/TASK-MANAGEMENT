@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 /**
  * StatusButton - 专门用于 Task Modal 中的状态选择按钮
  * 解决抖动问题：使用统一的 border + box-shadow 方案
  */
 export function StatusButton({ status, isSelected, onClick }) {
+  const [isHovered, setIsHovered] = useState(false);
   const statusConfig = {
     'Not Started': { label: 'Not Started', color: '#999999', bgColor: '#99999933' },
     'In Progress': { label: 'In Progress', color: '#FFD93D', bgColor: '#FFD93D33' },
@@ -13,11 +14,14 @@ export function StatusButton({ status, isSelected, onClick }) {
   };
 
   const config = statusConfig[status] || statusConfig['Not Started'];
+  const isActive = isSelected || isHovered;
 
   return (
     <button
       type="button"
       onClick={onClick}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       style={{
         padding: '10px 20px',
         borderRadius: '8px',
@@ -27,9 +31,9 @@ export function StatusButton({ status, isSelected, onClick }) {
         cursor: 'pointer',
         outline: 'none',
         transition: 'all 0.15s ease',
-        backgroundColor: isSelected ? config.bgColor : '#1E1E1E',
-        color: isSelected ? config.color : '#888888',
-        boxShadow: isSelected ? `inset 0 0 0 1px ${config.color}` : 'none',
+        backgroundColor: isActive ? config.bgColor : '#1E1E1E',
+        color: isActive ? config.color : '#888888',
+        boxShadow: isActive ? `inset 0 0 0 1px ${config.color}` : 'none',
         minWidth: 'unset',
         height: '40px',
         boxSizing: 'border-box'
