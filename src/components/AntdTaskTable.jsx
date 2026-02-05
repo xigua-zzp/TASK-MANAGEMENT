@@ -71,7 +71,7 @@ export function TaskTable({ dataSource = [], selectedTaskId, onRow, onDoubleClic
             {level > 0 && (
               <span
                 style={{
-                  width: '28px',
+                  width: '22px',
                   height: '2px',
                   backgroundColor: '#444',
                   alignSelf: 'flex-start',
