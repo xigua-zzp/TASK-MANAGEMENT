@@ -7,6 +7,7 @@ import {
 } from './ui/dialog';
 import { CaretDownOutlined, CaretRightOutlined } from '@ant-design/icons';
 import dataService from '../services/dataService';
+import StatusButton from './StatusButton';
 
 /**
  * 任务弹窗组件
@@ -208,23 +209,15 @@ function TaskModal({ task, projectId, onSave, onClose, onDelete }) {
             </label>
             <div className="flex gap-[12px] h-[40px]">
               {['Not Started', 'In Progress', 'Blocked', 'Done'].map((status) => (
-                <button
+                <StatusButton
                   key={status}
-                  type="button"
+                  status={status}
+                  isSelected={formData.status === status}
                   onClick={(e) => {
                     e.stopPropagation();
                     handleChange('status', status);
                   }}
-                  className={`
-                    px-[20px] py-[10px] rounded-[8px] text-[14px] cursor-pointer transition-all outline-none focus-visible:ring-0 focus-visible:ring-offset-0 border-2 border-[#333333]
-                    ${formData.status === status
-                      ? 'bg-[#4B410F] text-[#D4AF37] font-medium shadow-[0_0_0_1px_#D4AF37]'
-                      : 'bg-[#1E1E1E] text-[#888888] font-normal'
-                    }
-                  `}
-                >
-                  {status}
-                </button>
+                />
               ))}
             </div>
           </div>
